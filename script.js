@@ -3,7 +3,7 @@ const foodSound=new Audio('./music/food.mp3');
 const gameOverSound=new Audio('./music/gameover.mp3');
 const moveSound=new Audio('./music/move.mp3');
 const musicSound=new Audio('./music/Romeo.mp3');
-let spped=2;
+let spped=4;
 let lastPaintTime=0;
 let snakeArr=[
     {x:13,y:15}
@@ -19,8 +19,13 @@ function main(ctime){
     lastPaintTime=ctime;
     gameEngine();
 }
-function isColide(sarr){
-    return false;
+function isColide(snake){
+    //if snake collide itself
+    for(let i=1; i< snake.length; i++){
+        if(snake[i].x=== snake[0].x && snake[i].y===snake[0].y){
+            return true;
+        }
+    }
 }
 
 function gameEngine(){
@@ -36,13 +41,14 @@ function gameEngine(){
     }
     //snake eat the food then increment the food and score
     if(snakeArr[0].y===food.y && snakeArr[0].x===food.x){
+        foodSound.play();
         snakeArr.unshift({x:snakeArr[0].x+inputDir.x, y:snakeArr[0].y + inputDir.y});
         let a=2;
         let b=16;
         food={x:Math.round(a+(b-a)* Math.random()),y:Math.round(a+(b-a)*Math.random())}
     }
     //moving the snake
-    for(let i=snakeArr.length-2; i>0; i--){
+    for(let i=snakeArr.length-2; i>=0; i--){
         snakeArr[i+1]={...snakeArr[i]};
     }
     snakeArr[0].x += inputDir.x;

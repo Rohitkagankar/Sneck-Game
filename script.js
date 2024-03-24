@@ -2,7 +2,7 @@ let inputDir={x:0,y:0};
 const foodSound=new Audio('./music/food.mp3');
 const gameOverSound=new Audio('./music/gameover.mp3');
 const moveSound=new Audio('./music/move.mp3');
-const musicSound=new Audio('./music/Romeo.mp3');
+const musicSound=new Audio('./music/travel.mp3');
 let speed=4;
 let lastPaintTime=0;
 let snakeArr=[
@@ -10,23 +10,7 @@ let snakeArr=[
 ]
 food={x:6,y:7};
 let score=0;
-// function setSpeed(score){
-//     if(score>10){
-//         speed=6;
-//     }else if(score>20){
-//         speed=8;
-//     }else if(score>30){
-//         speed=10;
-//     }else if(score>40){
-//         speed=12;
-//     }else if(score>50){
-//         speed=14;
-//     }else if(score>60){
-//         speed=16;
-//     }else if(score>100){
-//         speed=18;
-//     }
-// }
+
 function main(ctime){
     
     window.requestAnimationFrame(main);

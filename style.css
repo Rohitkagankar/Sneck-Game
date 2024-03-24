@@ -84,3 +84,10 @@ body{
     width: 400px;
     height: 500px;
 }
+.madeby{
+    position: absolute;
+    left: 90px;
+    bottom: 50px;
+    color: rgb(0, 217, 255);
+    font-size: 18px;
+}

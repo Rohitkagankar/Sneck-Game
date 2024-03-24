@@ -3,17 +3,34 @@ const foodSound=new Audio('./music/food.mp3');
 const gameOverSound=new Audio('./music/gameover.mp3');
 const moveSound=new Audio('./music/move.mp3');
 const musicSound=new Audio('./music/Romeo.mp3');
-let spped=4;
+let speed=4;
 let lastPaintTime=0;
 let snakeArr=[
     {x:13,y:15}
 ]
 food={x:6,y:7};
 let score=0;
-
+// function setSpeed(score){
+//     if(score>10){
+//         speed=6;
+//     }else if(score>20){
+//         speed=8;
+//     }else if(score>30){
+//         speed=10;
+//     }else if(score>40){
+//         speed=12;
+//     }else if(score>50){
+//         speed=14;
+//     }else if(score>60){
+//         speed=16;
+//     }else if(score>100){
+//         speed=18;
+//     }
+// }
 function main(ctime){
+    
     window.requestAnimationFrame(main);
-    if((ctime-lastPaintTime)/1000 < 1/spped){
+    if((ctime-lastPaintTime)/1000 < 1/speed){
         return;
     }
     lastPaintTime=ctime;
@@ -46,6 +63,28 @@ function gameEngine(){
     if(snakeArr[0].y===food.y && snakeArr[0].x===food.x){
         foodSound.play();
         score+=2;
+        if(score>15){
+            speed=7;
+        }else if(score>30){
+            speed=10;
+        }else if(score>45){
+            speed=13;
+        }else if(score>60){
+            speed=17;
+        }else if(score>75){
+            speed=22;
+        }else if(score>90){
+            speed=26;
+        }else if(score>110){
+            speed=30;
+        }else if(score>125){
+            speed=35;
+        }
+        if(score>hiscoreval){
+            hiscoreval=score;
+            localStorage.setItem("hiscore",JSON.stringify(hiscoreval));
+            hiscoreBox.innerHTML="High score: "+hiscoreval;
+        }
         scoreBox.innerHTML="Score: "+ score;
         snakeArr.unshift({x:snakeArr[0].x+inputDir.x, y:snakeArr[0].y + inputDir.y});
         let a=2;
@@ -86,6 +125,14 @@ function gameEngine(){
 
 
 //main logic starts hear-----
+let hiscore=localStorage.getItem("hiscore");
+if(hiscore===null){
+    hiscoreval=0;
+    localStorage.setItem("hiscore",JSON.stringify(hiscoreval))
+}else{
+    hiscoreval=JSON.parse(hiscore);
+    hiscoreBox.innerHTML="High score: "+hiscore;
+}
 window.requestAnimationFrame(main);
 window.addEventListener('keydown',e=>{
     inputDir={x:0,y:1}; //start the game

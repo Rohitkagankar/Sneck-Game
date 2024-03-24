@@ -26,6 +26,9 @@ function isColide(snake){
             return true;
         }
     }
+    if(snake[0].x >18 || snake[0].x <=0 || snake[0].y >18 || snake[0].y<=0){
+        return true;
+    }
 }
 
 function gameEngine(){
@@ -42,6 +45,8 @@ function gameEngine(){
     //snake eat the food then increment the food and score
     if(snakeArr[0].y===food.y && snakeArr[0].x===food.x){
         foodSound.play();
+        score+=2;
+        scoreBox.innerHTML="Score: "+ score;
         snakeArr.unshift({x:snakeArr[0].x+inputDir.x, y:snakeArr[0].y + inputDir.y});
         let a=2;
         let b=16;
@@ -85,6 +90,7 @@ window.requestAnimationFrame(main);
 window.addEventListener('keydown',e=>{
     inputDir={x:0,y:1}; //start the game
     moveSound.play();
+    musicSound.play();
     switch(e.key){
         case "ArrowUp":
             console.log("ArrowUp");
